@@ -21,13 +21,11 @@ app.get("/scrape", function (req, res) {
     request("https://www.bbc.com/news/technology/", function (error, response, html) {
         var $ = cheerio.load(html);
         var results = [];
-        $("div.column--primary").each(function (i, element) {
+        $("a.title-link").each(function (i, element) {
 
-            var heading = $(element).find("h3").text().split(",")
-            var summary = $(element).find("p").map(function (x, el) {
-                return $(this).text()
-            }).get()
-            var url = $(element).find("a").attr("href")
+            var heading = $(element).children("h3").text().trim();
+            var summary = $(element).next("p").text();
+            var url = $(element).attr("href");
 
             results.push({
                 heading: heading,
