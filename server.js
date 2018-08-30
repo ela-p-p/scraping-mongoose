@@ -33,7 +33,7 @@ app.get("/scrape", function (req, res) {
                 url: url
             });
             console.log(results)
-            // Create a new Article using the `result` object built from scraping
+   
             db.Article.insertMany(results)
                 .then(function (dbArticle) {
                     res.json(dbArticle);
@@ -41,12 +41,10 @@ app.get("/scrape", function (req, res) {
                 .catch(function (err) {
                     return res.json(err);
                 });
-
         });
 
     });
 });
-
 
 app.get("/article", function (req, res) {
     db.Article.find({})
