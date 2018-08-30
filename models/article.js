@@ -8,12 +8,7 @@ var ArticleSchema = new Schema({
     required: true
   },
   summary: {
-    longstring: String,
-    // validate: [
-    //   function(input) {
-    //     return input.length >= 6;
-    //   },
-    // ]
+    type: String
   },
   url: {
     type: String,

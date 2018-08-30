@@ -25,7 +25,7 @@ app.get("/scrape", function (req, res) {
 
             var heading = $(element).children("h3").text().trim();
             var summary = $(element).next("p").text();
-            var url = $(element).attr("href");
+            var url = "https://www.bbc.com" + $(element).attr("href");
 
             results.push({
                 heading: heading,
@@ -33,7 +33,7 @@ app.get("/scrape", function (req, res) {
                 url: url
             });
             console.log(results)
-            // Create a new Article using the `result` object built from scraping
+   
             db.Article.insertMany(results)
                 .then(function (dbArticle) {
                     res.json(dbArticle);
@@ -57,7 +57,6 @@ app.get("/article", function (req, res) {
 });
 
 
-// Start the server
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
 });
